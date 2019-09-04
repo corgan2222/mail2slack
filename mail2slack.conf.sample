@@ -1,0 +1,14 @@
+[slack]
+end_point = https://hooks.slack.com/services/xxxxxxxxxxx/xxxxxxx/xxxxxxxxxxxxxxxxx
+sender = Mailparser
+icon_url = https://knaak.org/assets/img/128/linux-ubuntu.png
+fallback_msg = FALLBACK_MESSAGE
+
+[mail]
+server = yourmailserver.com
+username = username
+password = pw
+folder = Inbox
+
+
+              
