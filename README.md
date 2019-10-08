@@ -11,3 +11,5 @@ Setup:
 
 prepared for PM3
 - just run #pm2 start ecosystem.config.js 
+
+https://github.com/corgan2222/mail2slack/wiki
