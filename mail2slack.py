@@ -16,7 +16,6 @@ import mailparser
 import slack
 import urllib.parse
 
-
 # Initialize LOGGER function
 logging.basicConfig()
 LOGGER = logging.getLogger('mail2slack')
@@ -60,6 +59,7 @@ while True:
 
     def process_mailbox(config, mailbox):
         """ Main flow to process mailbox folder selected previously """
+        
 
         receive, data = mailbox.search(None, "UNSEEN")
         if receive != 'OK':
@@ -74,11 +74,13 @@ while True:
                 return
 
             mail = mailparser.parse_from_bytes(data[0][1])
+
             plain =  ' '.join(mail.text_plain) 
             plain = plain.replace('"', '\\"') 
-            plain = plain.replace('<', ' ') 
-            plain = plain.replace('>', ' ') 
-            plain = plain.replace('&', ' ') 
+            plain = plain.replace('<', '&lt;') 
+            plain = plain.replace('>', '&gt;') 
+            plain = plain.replace('&', '&amp;') 
+            plain = plain.replace('\r', ' ') 
 
             slack_msg = '{                                               \
                 "username": "' + config['slack_sender'] + '",            \
@@ -88,7 +90,7 @@ while True:
                         "fallback": "' + mail.subject + '",  \
                         "color": "warning",                              \
                         "pretext": "",                                   \
-                        "author_name": " ",                 \
+                        "author_name": "' + mail.from_[0][1] + '",  \
                         "author_link": "https://webmail.knaak.org",    \
                         "author_icon": "",                               \
                         "title": "' + mail.subject + '",                 \
