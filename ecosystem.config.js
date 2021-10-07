@@ -9,7 +9,7 @@ module.exports = {
     instances: 1,
     max_memory_restart: '1G', 
     interpreter: '/usr/bin/python3.6',
-    time: true
+    time: true,
     env: {
         NODE_ENV: 'development'
       },
@@ -19,3 +19,4 @@ module.exports = {
   }, 
  ]
 };
+ 

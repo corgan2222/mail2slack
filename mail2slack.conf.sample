@@ -3,6 +3,9 @@ end_point = https://hooks.slack.com/services/xxxxxxxxxxx/xxxxxxx/xxxxxxxxxxxxxxx
 sender = Mailparser
 icon_url = https://knaak.org/assets/img/128/linux-ubuntu.png
 fallback_msg = FALLBACK_MESSAGE
+channel = channel
+token = xxxx
+
 
 [mail]
 server = yourmailserver.com
