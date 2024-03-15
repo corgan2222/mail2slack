@@ -8,7 +8,7 @@ module.exports = {
     pid: '~/.local/share/m2s.pid',
     instances: 1,
     max_memory_restart: '1G', 
-    interpreter: '/usr/bin/python3.6',
+    interpreter: '/usr/bin/python',
     time: true,
     env: {
         NODE_ENV: 'development'
