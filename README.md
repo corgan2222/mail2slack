@@ -39,7 +39,7 @@ docker-compose up -d
 - dont forget to change the settings!
 
 ```shell
-docker run -d --name mail2slack \
+docker run -d --restart unless-stopped  --name mail2slack \
   -e SLACK_END_POINT="https://hooks.slack.com/services/xxxxxxxxxxxxxxxxxx" \
   -e SLACK_SLACK_SENDER="Mailparser" \
   -e SLACK_ICON_URL="https://raw.githubusercontent.com/corgan2222/mail2slack/master/docs/logo.png" \
@@ -54,6 +54,7 @@ docker run -d --name mail2slack \
   -e MAIL_TITLE_LINK="https://github.com/corgan2222/mail2slack" \
   -e MAIL_FOOTER="xxx@yyyy.com" \
   -e MAIL_FOOTER_ICON="https://raw.githubusercontent.com/corgan2222/mail2slack/master/docs/logo.png" \
+  -e GENERAL_LOG_LEVEL="INFO" \
   stefanknaak/mail2slack:latest
 ```
 

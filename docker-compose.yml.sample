@@ -2,6 +2,7 @@ version: '3'
 services:
   mail2slack:
     image: stefanknaak/mail2slack:latest
+    restart: unless-stopped
     environment:
       SLACK_END_POINT: "https://hooks.slack.com/services/xxxxxxxxxxxxxxxxxx"
       SLACK_SLACK_SENDER: "Mailparser"
@@ -17,3 +18,4 @@ services:
       MAIL_TITLE_LINK: "https://github.com/corgan2222/mail2slack"
       MAIL_FOOTER: "xxx@yyyy.com"
       MAIL_FOOTER_ICON: "https://raw.githubusercontent.com/corgan2222/mail2slack/master/docs/logo.png"
+      GENERAL_LOG_LEVEL: "INFO"

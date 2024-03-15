@@ -18,7 +18,7 @@ from version import __version__
 # Initialize LOGGER function
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 LOGGER = logging.getLogger()
-LOGGER.setLevel(logging.INFO)
+#LOGGER.setLevel(logging.INFO)
 
 def get_text(message):
     """ Get content of email and return a string """
@@ -181,7 +181,8 @@ def read_config_file(config_f, args, config):
     else:
         schema = {
             'SLACK': ['end_point', 'slack_sender', 'icon_url', 'slack_fallback', 'channel', 'token'],
-            'MAIL': ['mailserver', 'mail_login', 'mail_pw', 'folder', 'author_link', 'title_link', 'footer', 'footer_icon']
+            'MAIL': ['mailserver', 'mail_login', 'mail_pw', 'folder', 'author_link', 'title_link', 'footer', 'footer_icon'],
+            'GENERAL': ['log_level']
         }
         for section, options in schema.items():
             for option in options:
@@ -193,6 +194,12 @@ def read_config_file(config_f, args, config):
                 else:
                     config[option] = env_var_value
 
+    # Check for 'LOG_LEVEL' environment variable or 'log_level' in config dictionary with a default of 'INFO'
+    log_level_name = os.getenv('LOG_LEVEL') or config.get('log_level', 'INFO').upper()
+    # Convert log level name to a logging level and apply it
+    log_level = logging.getLevelName(log_level_name)
+    LOGGER.setLevel(log_level)
+
     if missing_config:
         LOGGER.error("Application configuration is incomplete. Exiting.")
         sys.exit(1)
@@ -200,7 +207,7 @@ def read_config_file(config_f, args, config):
 if __name__ == "__main__":
     LOGGER.info(f"...Starting mail2slack version: {__version__}...")
     while True:
-        LOGGER.info(f"Starting process_mails: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+        LOGGER.debug(f"Starting process_mails: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         process_mails()        
         time.sleep(10)
 

@@ -4,12 +4,16 @@ FROM python:3.11-slim
 # Set the working directory in the container
 WORKDIR /usr/src/app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    gcc \
-    libc-dev \
-    # Add any other dependencies you might need
- && rm -rf /var/lib/apt/lists/*
+# Define build argument for the platform
+ARG TARGETPLATFORM
+
+# Install system dependencies conditionally
+RUN if [ "$TARGETPLATFORM" != "linux/amd64" ]; then \
+        apt-get update && apt-get install -y \
+        gcc \
+        libc-dev \
+    ; fi \
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy the current directory contents into the container at /usr/src/app
 COPY requirements.txt ./
@@ -18,11 +22,13 @@ COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of your application's source code from your host to your image filesystem.
-COPY * .
+# Ensure .dockerignore is set up to ignore files you don't want to copy
+COPY . .
 
-LABEL org.opencontainers.image.source=https://github.com/corgan2222/mail2slack
-LABEL org.opencontainers.image.description="mail2slack"
-LABEL org.opencontainers.image.licenses=GPL-3
+# Metadata as key=value labels
+LABEL org.opencontainers.image.source="https://github.com/corgan2222/mail2slack" \
+      org.opencontainers.image.description="mail2slack" \
+      org.opencontainers.image.licenses="GPL-3"
 
 # Set environment variables
 ENV END_POINT="" \
@@ -38,7 +44,8 @@ ENV END_POINT="" \
     AUTHOR_LINK="" \
     TITLE_LINK="" \
     FOOTER="" \
-    FOOTER_ICON=""
+    FOOTER_ICON="" \
+    LOG_LEVEL="" 
 
 # Run app.py when the container launches
 CMD ["python", "./mail2slack.py"]
