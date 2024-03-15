@@ -1,2 +1,5 @@
 
 mail2slack.conf
+docker-compose.yml
+create_docker_multi.bat
+_mail2slack.conf

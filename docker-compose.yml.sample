@@ -1,0 +1,19 @@
+version: '3'
+services:
+  mail2slack:
+    image: stefanknaak/mail2slack:latest
+    environment:
+      SLACK_END_POINT: "https://hooks.slack.com/services/xxxxxxxxxxxxxxxxxx"
+      SLACK_SLACK_SENDER: "Mailparser"
+      SLACK_ICON_URL: "https://raw.githubusercontent.com/corgan2222/mail2slack/master/docs/logo.png"
+      SLACK_SLACK_FALLBACK: "FALLBACK_MESSAGE"
+      SLACK_CHANNEL: "xxxx"
+      SLACK_TOKEN: "xoxp-xxxxxxxx-xxxxxxxxxxx-xxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxx"
+      MAIL_MAILSERVER: "mail.server.com"
+      MAIL_MAIL_LOGIN: "mail@server.com"
+      MAIL_MAIL_PW: "xxxyyyyy"
+      MAIL_FOLDER: "Inbox"
+      MAIL_AUTHOR_LINK: "https://github.com/corgan2222/mail2slack"
+      MAIL_TITLE_LINK: "https://github.com/corgan2222/mail2slack"
+      MAIL_FOOTER: "xxx@yyyy.com"
+      MAIL_FOOTER_ICON: "https://raw.githubusercontent.com/corgan2222/mail2slack/master/docs/logo.png"
