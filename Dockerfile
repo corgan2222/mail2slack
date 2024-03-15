@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.9-slim
+FROM python:3.11-slim
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
@@ -12,6 +12,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of your application's source code from your host to your image filesystem.
 COPY * .
+
+LABEL org.opencontainers.image.source=https://github.com/corgan2222/mail2slack
+LABEL org.opencontainers.image.description="mail2slack"
+LABEL org.opencontainers.image.licenses=GPL-3
 
 # Set environment variables
 ENV END_POINT="" \

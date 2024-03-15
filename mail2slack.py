@@ -12,6 +12,7 @@ from datetime import datetime
 import mailparser
 from slack import WebClient
 from slack.errors import SlackApiError
+from version import __version__
 
 
 # Initialize LOGGER function
@@ -197,7 +198,7 @@ def read_config_file(config_f, args, config):
         sys.exit(1)
 
 if __name__ == "__main__":
-    LOGGER.info("...Starting mail2slack...")
+    LOGGER.info(f"...Starting mail2slack version: {__version__}...")
     while True:
         LOGGER.info(f"Starting process_mails: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         process_mails()        
